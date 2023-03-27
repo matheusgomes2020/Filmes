@@ -17,10 +17,13 @@ class HomeViewModel @Inject constructor( private val repository: FilmesRepositor
     : ViewModel(){
 
     var list: List<com.example.filmesesries.model.Result> by mutableStateOf(listOf())
+    var list2: List<com.example.filmesesries.model.Result> by mutableStateOf(listOf())
     var isLoading: Boolean by mutableStateOf(true)
+    var isLoading2: Boolean by mutableStateOf(true)
 
     init {
         carregarFilmesPopulares()
+        loadFilmes()
     }
 
     private fun loadFilmes() {
@@ -66,18 +69,18 @@ class HomeViewModel @Inject constructor( private val repository: FilmesRepositor
             try {
                 when(val response = repository.getFilmes(query)) {
                     is Resource.Success -> {
-                        list = response.data!!
-                        if (list.isNotEmpty()) isLoading = false
+                        list2 = response.data!!
+                        if (list2.isNotEmpty()) isLoading2 = false
                     }
                     is Resource.Error -> {
-                        isLoading = false
+                        isLoading2= false
                         Log.e("Network", "searchFilmes: Failed getting filmes", )
                     }
-                    else -> {isLoading = false}
+                    else -> {isLoading2 = false}
                 }
 
             }catch (exception: Exception){
-                isLoading = false
+                isLoading2 = false
                 Log.d("Network", "searchFilmes: ${exception.message.toString()}")
             }
 

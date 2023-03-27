@@ -12,7 +12,7 @@ class FilmesRepository @Inject constructor( private val api: FilmesApi) {
         return try {
             Resource.Loading( data = true )
 
-            val itemList = api.getAllFilmes(Constants.API_KEY, searchQuery).results
+            val itemList = api.getAllFilmes( searchQuery).results
             if (itemList.isNotEmpty()) Resource.Loading(data = false)
             Resource.Success(data = itemList)
 
