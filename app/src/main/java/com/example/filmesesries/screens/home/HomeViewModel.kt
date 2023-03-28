@@ -17,7 +17,7 @@ class HomeViewModel @Inject constructor( private val repository: FilmesRepositor
     : ViewModel(){
 
     var list: List<com.example.filmesesries.model.Result> by mutableStateOf(listOf())
-    var list2: List<com.example.filmesesries.model.Result> by mutableStateOf(listOf())
+    var list2: List<com.example.filmesesries.model.ResultX> by mutableStateOf(listOf())
     var isLoading: Boolean by mutableStateOf(true)
     var isLoading2: Boolean by mutableStateOf(true)
 
@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor( private val repository: FilmesRepositor
     }
 
     private fun loadFilmes() {
-        searchFilmes("avengers")
+        searchFilmes("Avengers")
     }
 
     private fun carregarFilmesPopulares() {
@@ -67,7 +67,7 @@ class HomeViewModel @Inject constructor( private val repository: FilmesRepositor
             }
 
             try {
-                when(val response = repository.getFilmes(query)) {
+                when(val response = repository.searchMovies(query)) {
                     is Resource.Success -> {
                         list2 = response.data!!
                         if (list2.isNotEmpty()) isLoading2 = false

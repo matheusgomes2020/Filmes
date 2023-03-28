@@ -10,6 +10,8 @@ import androidx.navigation.navArgument
 import com.example.filmesesries.screens.details.DetailsScreen
 import com.example.filmesesries.screens.home.Home
 import com.example.filmesesries.screens.home.HomeViewModel
+import com.example.filmesesries.screens.search.SearchScreen
+import com.example.filmesesries.screens.search.SearchViewModel
 
 @Composable
 fun FilmesNavigation(){
@@ -22,6 +24,12 @@ fun FilmesNavigation(){
             val searchViewModel = hiltViewModel<HomeViewModel>()
 
             Home(navController = navController, viewModel = searchViewModel)
+        }
+
+        composable(MovieScreens.SearchScreen.name) {
+            val searchViewModel = hiltViewModel<SearchViewModel>()
+
+            SearchScreen(navController = navController, viewModel = searchViewModel)
         }
 
         val detailName = MovieScreens.DetailsScreen.name

@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,8 +39,13 @@ fun Home(
         MovieAppBar(
             title = "Filmes",
             icon = Icons.Default.ArrowBack,
+            icon2 = Icons.Default.Search,
             color = Color.Transparent,
-            navController = navController)
+            isPrincipalOrSettings = true,
+            navController = navController,
+            onIconClicked = {
+                navController.navigate(MovieScreens.SearchScreen.name)
+            } )
         
     }) {
         Surface( modifier = Modifier.fillMaxSize() ) {

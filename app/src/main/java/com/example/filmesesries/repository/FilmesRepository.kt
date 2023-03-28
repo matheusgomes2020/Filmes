@@ -2,17 +2,16 @@ package com.example.filmesesries.repository
 
 import com.example.filmesesries.data.Resource
 import com.example.filmesesries.network.FilmesApi
-import com.example.filmesesries.utils.Constants
 import javax.inject.Inject
 
 class FilmesRepository @Inject constructor( private val api: FilmesApi) {
 
-    suspend fun getFilmes(searchQuery: String): Resource<List<com.example.filmesesries.model.Result>> {
+    suspend fun searchMovies(searchQuery: String): Resource<List<com.example.filmesesries.model.ResultX>> {
 
         return try {
             Resource.Loading( data = true )
 
-            val itemList = api.getAllFilmes( searchQuery).results
+            val itemList = api.searchMovies( searchQuery).results
             if (itemList.isNotEmpty()) Resource.Loading(data = false)
             Resource.Success(data = itemList)
 
@@ -40,7 +39,7 @@ class FilmesRepository @Inject constructor( private val api: FilmesApi) {
 
         val response = try {
             Resource.Loading( data = true )
-            api.getFilmeInfo( movieID )
+            api.getMovieInfo( movieID )
         } catch (exception: Exception){
             return Resource.Error(message = "An error occurred ${exception.message.toString()}")
         }
