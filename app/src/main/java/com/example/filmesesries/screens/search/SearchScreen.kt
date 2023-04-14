@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,7 +66,7 @@ fun SearchScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)) {searchQuery ->
-                            viewModel.searchMovies( query = searchQuery )
+                            viewModel.searchMovies( searchQuery )
                         }
                 Spacer(modifier = Modifier.height( 13.dp ))
 
@@ -111,9 +112,9 @@ fun FilmeRow2(
             .clickable {
                 navController.navigate(MovieScreens.DetailsScreen.name + "/${filme.id}")
             }
-            // .fillMaxWidth()
-            .height(230.dp)
-            .width(150.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            //.width(150.dp)
             //.fillMaxHeight()
             .padding(2.dp),
         shape = RectangleShape,
@@ -127,31 +128,27 @@ fun FilmeRow2(
             "https://image.tmdb.org/t/p/w500" + filme.poster_path
         }
 
+            Row() {
+
+                Image(painter = rememberImagePainter(data = imageUrl.toString() ),
+                    contentDescription = "filme image",
+                    modifier = Modifier
+                        .width(80.dp)
+                        .fillMaxHeight()
+                )
+
+                Column(modifier = Modifier.padding(top = 10.dp)) {
+
+                Text(text = filme.title,
+                fontFamily = FontFamily.SansSerif)
+                Text(text = filme.release_date)
+                //Text(text = filme.overview)
+                //Text(text = filme.popularity.toString())
+                Text(text = filme.vote_average.toString())
+                //Text(text = filme.id.toString())
+            }
 
 
-
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-            Image(painter = rememberImagePainter(data = imageUrl.toString() ),
-                contentDescription = "filme image",
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(200.dp),
-            )
-            //Text(text = filme.title)
-            //Text(text = filme.release_date)
-            //Text(text = filme.overview)
-            //Text(text = filme.popularity.toString())
-            //Text(text = filme.vote_average.toString())
-            //Text(text = filme.id.toString())
-            Text(text = "⭐" + filme.vote_average.toString(),
-                modifier = Modifier.padding(start = 1.dp),
-                fontSize = 15.sp,
-            )
         }
 
 

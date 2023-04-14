@@ -23,7 +23,7 @@ class SearchViewModel @Inject constructor( private val repository: FilmesReposit
         loadMovies()
     }
     private fun  loadMovies() {
-        searchMovies("Avengers")
+        searchMovies("Avatar")
     }
     fun searchMovies(query: String) {
 
